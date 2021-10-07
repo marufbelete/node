@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
-const HomeSchema = new mongoose.Schema({
-  homeSize: {
-    type: Number,
-    trim: true,
-    required: true,
-  },
-  //studio or other
-  typeOfHome: {
+const GarmentAndShoesSchema = new mongoose.Schema({
+  itemCatagory:{
     type: String,
     trim: true,
-    required: true,
+  },
+  size: {
+    type: Number,
+    trim: true,
+   
+  },
+  brandName: {
+    type: String,
+    trim: true,
+   
   },
   givenFor: {
     type: String,
@@ -58,6 +61,6 @@ const HomeSchema = new mongoose.Schema({
 );
 
 
-const HomePost = mongoose.model("Homepost", HomeSchema);
+const GarmentShoes = mongoose.model("Gramentandshoespost", GarmentAndShoesSchema);
 
-module.exports = HomePost;
+module.exports = GarmentShoes;

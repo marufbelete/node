@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
-const HomeSchema = new mongoose.Schema({
-  homeSize: {
-    type: Number,
+const ElectronicsSchema = new mongoose.Schema({
+
+ itemCatagory:{
+    type: String,
     trim: true,
-    required: true,
   },
-  //studio or other
-  typeOfHome: {
+  brandName: {
     type: String,
     trim: true,
     required: true,
@@ -58,6 +57,6 @@ const HomeSchema = new mongoose.Schema({
 );
 
 
-const HomePost = mongoose.model("Homepost", HomeSchema);
+const ElectronicsPost = mongoose.model("Electronicpost", ElectronicsSchema);
 
-module.exports = HomePost;
+module.exports = ElectronicsPost;

@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
-const HomeSchema = new mongoose.Schema({
-  homeSize: {
+const VehicleSchema = new mongoose.Schema({
+  numberOfSit: {
     type: Number,
     trim: true,
     required: true,
   },
-  //studio or other
-  typeOfHome: {
+  typeOfVehicle: {
     type: String,
     trim: true,
     required: true,
@@ -23,16 +22,6 @@ const HomeSchema = new mongoose.Schema({
     required: true,
   },
   city: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  subCity: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  locationName: {
     type: String,
     trim: true,
     required: true,
@@ -58,6 +47,6 @@ const HomeSchema = new mongoose.Schema({
 );
 
 
-const HomePost = mongoose.model("Homepost", HomeSchema);
+const VehiclePost = mongoose.model("Vehiclepost", VehicleSchema);
 
-module.exports = HomePost;
+module.exports = VehiclePost;
