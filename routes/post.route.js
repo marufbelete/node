@@ -1,56 +1,48 @@
 const express = require('express');
 const userauth = require("../middleware/auth.middleware")
-const { createHomePost } = require('../controllers/homepost.controller');
-const { getSaleApartmentHomePost,getSaleStudioHomePost,getSingleHomePost,getSaleVillaHomePost } = require('../controllers/homepost.controller');
-const { getRentApartmentHomePost,getRentStudioHomePost,getRentVillaHomePost } = require('../controllers/homepost.controller');
-const { edithomepost } = require('../controllers/homepost.controller');
-const { deletehomepost } = require('../controllers/homepost.controller');
-const multer=require("multer")
+const { createPost,getPost,updatePostStatus,deletePost,updatePost } = require('../controllers/post.controller')
+const {createCatagory,getCatgory,updateCatagory,deleteCatagory} = require('../controllers/catagory.controller')
+const {createLocation,getLocation,updateLocation,deleteLocation,getCity,getSubcity,getVillage} = require('../controllers/location.controller')
+const multer=require("multer");
 const router = express.Router();
 const fileStorage = multer.memoryStorage()
-  
+
+// file compression
 const filefilter = (req, file, cb) => {
     console.log("filter")
   if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
     cb(null, true)
   }
-
   else {
-
-  } cb(null, false)
+    const type=file.mimetype.split("/")[1]
+    req.mimetypeError=`${type} file is not allowed please attach only image file`;
+    cb(null, false,new Error(`${type} file is not allowed please attach only image file`))
+    
+  } 
 }
-const upload=multer({ storage: fileStorage, filefilter: filefilter })
-//creating post API
-router.post('/createhomepost', userauth,upload.single('image'),createHomePost)
+const upload=multer({ storage: fileStorage, fileFilter: filefilter })
 
-//get post by cat for sale API
-router.get('/getsaleapartmenthomepost', userauth, getSaleApartmentHomePost)
-router.get('/getsalevillhomepost', userauth, getSaleVillaHomePost)
-router.get('/getsalestudiohomepost', userauth, getSaleStudioHomePost)
+//post
+router.post('/createpost', userauth,upload.array('image',6),createPost)
+router.get('/getpost/:firstcatagory/:secondcatagory/:thiredcatgory', userauth,getPost)
+router.put('/updatepost/:id',upload.array('image',6), userauth,updatePost)
+router.put('/updatepoststatus/:id', userauth,updatePostStatus)
+router.delete('/deletepost/:id', userauth,deletePost)
 
-//get post by  cafor rent API
-router.get('/getrentapartmenthomepost', userauth, getRentApartmentHomePost)
-router.get('/getrentvillhomepost', userauth, getRentVillaHomePost)
-router.get('/getrentstudiohomepost', userauth, getRentStudioHomePost)
+//catagory
+router.post('/createcatgory', userauth,upload.single('image'),createCatagory)
+router.get('/getcatagory', userauth,getCatgory)
+router.put('/updatecatagory/:id',upload.single('image'), userauth,updateCatagory)
+router.delete('/deletecatgory/:id', userauth,deleteCatagory)
 
-
-// get singlepost by id
-router.get('/getsinglepostbyid', userauth, getSingleHomePost)
-
-// router.post('/createhomepost', userauth, createhomepost)
-// router.post('/gethomepost', userauth, gethomepost)
-// router.post('/edithomepost', userauth, edithomepost)
-// router.post('/deletehomepost', userauth, deletehomepost)
-
-// router.post('/createhomepost', userauth, createhomepost)
-// router.post('/gethomepost', userauth, gethomepost)
-// router.post('/edithomepost', userauth, edithomepost)
-// router.post('/deletehomepost', userauth, deletehomepost)
-
-// router.post('/createhomepost', userauth, createhomepost)
-// router.post('/gethomepost', userauth, gethomepost)
-// router.post('/edithomepost', userauth, edithomepost)
-// router.post('/deletehomepost', userauth, deletehomepost)
+//location
+router.post('/addlocation', userauth,createLocation)
+router.get('/getlocation', userauth,getLocation)
+router.get('/getcity', userauth,getCity)
+router.get('/getsubcity', userauth,getSubcity)
+router.get('/getvillage/:city', userauth,getVillage)
+router.put('/updatelocation/:id', userauth,updateLocation)
+router.delete('/deletelocation/:id', userauth,deleteLocation)
 
 module.exports = router
 
