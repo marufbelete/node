@@ -77,7 +77,7 @@ exports.loginUser = async (req, res, next) => {
 //update user info
 exports.updateUser = async (req, res, next) => {
   try {
-    const name = req.params.name
+    const name = req.body.name
     const password=req.body.password
     const confirm_password= req.body.confirm_password
     const username=req.body.username;
