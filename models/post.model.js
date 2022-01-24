@@ -39,7 +39,6 @@ const PostSchema = new mongoose.Schema({
     village: {
         type: String,
         trim: true,
-        required: true,
         lowercase: true,
     },
 //     //catagory detail

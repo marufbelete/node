@@ -17,7 +17,6 @@ const LocationSchema = new mongoose.Schema({
   village: {
     type: String,
     trim: true,
-    required: true,
     lowercase: true,
   },
 },

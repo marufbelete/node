@@ -1,10 +1,15 @@
 const PostPost = require("../models/post.model");
+const LocationPost = require("../models/location.model");
+
 const sharp=require("sharp")
 const fs=require("fs");
 //for more than one file req.file will be chnaged in to req.files
 exports.createPost=async (req, res, next) => {
     try {
-
+        if(!!req.mimetypeError)
+        {
+            res.json(req.mimetypeError)
+        }
     const imgurl=[]
     console.log(req.body)
     if (req.files.length > 0)
@@ -25,6 +30,21 @@ console.log(req.files.length)
     imgurl.push(path)
  }
 
+ const isexist = await LocationPost.find({
+    city: req.body.city,
+    subCity: req.body.subcity,
+    village: req.body.village
+})
+if (isexist.length === 0) {
+    // save non exsting location
+    const location = new LocationPost({
+        city: req.body.city,
+        subCity: req.body.subcity,
+        village: req.body.village
+    })
+  await location.save()
+
+}
  const newpost = new PostPost({
     firstCatagoryType: req.body.firstcat,
     secondCatagoryType: req.body.secondcat,
@@ -52,7 +72,7 @@ res.json(post)
   
 
   catch {
-    res.json("some error please try again")
+    res.json("Error please try again")
   }
 }
 //get all post
@@ -64,7 +84,7 @@ exports.getPost = async (req, res, next) => {
         let skip = pagesize * page
 
         let conditions = [{firstCatagoryType:req.params.firstcatagory,secondCatagoryType:req.params.secondcatagory,thiredCatagoryType: req.params.thiredcatgory }];
-        let location = !!req.query.city ? req.query.city : "addis ababa";
+        let location = !!req.query.location ? req.query.location : "addis ababa";
         let price = !!req.query.price ? req.query.price : !!req.query.price;
         let brandname = !!req.query.brandname ? req.query.brandname : !!req.query.brandname;
 

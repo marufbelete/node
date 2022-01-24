@@ -11,7 +11,8 @@ exports.createCatagory=async (req, res, next) => {
         }
         if(!!req.file)
         {
-            if (!fs.existsSync("../images")) {
+            if (!fs.existsSync("../images"))
+             {
                 fs.mkdirSync("../images");
             }
             const imagetype = (req.file.mimetype).split("/")[1]
@@ -56,6 +57,7 @@ exports.getCatgory = async (req, res, next) => {
         res.json("Error please try again")
     }
 }
+
 
 // for admin update
 exports.updateCatagory = async (req, res,next)=> {
