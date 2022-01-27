@@ -13,12 +13,12 @@ router.post('/login', LoginUser)
 //manage item
 router.post('/additem',userauth, AddItem)
 router.get('/getallitems', userauth, GetAllItems)
-router.put('/edititem', userauth, UpdateItem)
-router.delete('/deleteitem', userauth, DeleteItem)
+router.put('/edititem/:id', userauth, UpdateItem)
+router.delete('/deleteitem/:id', userauth, DeleteItem)
 
 //sale
-router.post('/addtoshoping',  userauth,AddToShop)
-router.get('/getmyshoping',  userauth,GetMyShopping)
+router.post('/addtoshoping', userauth,AddToShop)
+router.get('/getmyshoping', userauth,GetMyShopping)
 
 
 

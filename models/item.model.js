@@ -5,7 +5,6 @@ const ItemSchema = new mongoose.Schema({
   ItemName: {
     type: String,
     trim: true,
-    enum : ['sale','rent'], 
     lowercase:true,
     required: true,
   },
@@ -13,7 +12,7 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     trim: true,
     required: true,
-    lowercase: true,
+
   },
 
 },
@@ -23,6 +22,6 @@ const ItemSchema = new mongoose.Schema({
 );
 
 
-const Item = mongoose.model("Iiem", ItemSchema);
+const Item = mongoose.model("item", ItemSchema);
 
 module.exports = Item ;

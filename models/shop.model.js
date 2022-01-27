@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Shopchema = new mongoose.Schema({
+const ShopSchema = new mongoose.Schema({
   //for this case embding this many to many relation
   // is better if we reference when in the future the price and other 
   // information of the item update it will also affect already sale item so
@@ -39,6 +39,6 @@ const Shopchema = new mongoose.Schema({
   },
 );
 
-const Shop = mongoose.model("shop", Shopchema);
+const Shop = mongoose.model("shop", ShopSchema);
 
 module.exports = Shop;
