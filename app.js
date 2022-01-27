@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const app = express();
-const userroute = require('./routes/user.route');
-const postroute = require('./routes/post.route');
+const route = require('./routes/test.route');
 const accessTokenSecret = 'youraccesstokensecret';
 
 app.use(express.json());
@@ -10,11 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // user route
-app.use(userroute)
-//post related route
-app.use(postroute)
+app.use(route)
 
-mongoose.connect("mongodb://localhost:27017/mela", {
+mongoose.connect("mongodb://localhost:27017/uptest", {
   useNewUrlParser: true
 })
 

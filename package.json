@@ -26,5 +26,13 @@
     "nodemon": "^1.19.4",
     "sharp": "^0.29.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marufbelete/mela.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marufbelete/mela/issues"
+  },
+  "homepage": "https://github.com/marufbelete/mela#readme"
 }

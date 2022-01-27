@@ -1,27 +1,32 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  username: {
+ 
+  //our cata perfume bodymakeup and hairtreatment
+  Name: {
     type: String,
     trim: true,
     required: true,
+    lowercase: true,
   },
-  password: {
+  UserName:{
     type: String,
-    trim: true,
     required: true,
+    unique: true,
   },
-  name: {
+  Password:{
     type: String,
-    trim: true,
-    
-  },
+    required: true,
+    unique: true,
+  }
+
 },
   {
     timestamps: true,
   },
 );
 
-const User = mongoose.model("user", UserSchema);
+
+const User= mongoose.model("user", UserSchema);
 
 module.exports = User;
